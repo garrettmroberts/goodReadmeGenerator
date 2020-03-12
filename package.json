@@ -1,0 +1,16 @@
+{
+  "name": "readme_generator",
+  "version": "0.0.1",
+  "description": "A simple readme generator made possible via the github api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Garrett Roberts",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "fs": "0.0.1-security",
+    "inquirer": "^7.1.0"
+  }
+}
