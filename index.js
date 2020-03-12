@@ -61,19 +61,32 @@ inquirer.prompt([
 ]).then(function(res) {
   // Destructures data to go into README
   const { title, username, description, installation, usage, license, contributing, tests, questions } = res;
- 
-  axios
-  .get(`https://api.github.com/users/${username}`)
-  .then(function(res) {
-    const { avatar_url, email } = res.data;
-    
-  })
+  var badge = "";
+  var profileImg = "";
 
-  var testReadmeData = 
+  axios
+    .get(`https://api.github.com/users/${username}`)
+    .then(function(res) {
+    const { avatar_url, email } = res.data;
+      if (email !== null) {
+        badge += `[![Generic badge](https://img.shields.io/badge/Contact_at-${email}-<COLOR>.svg)](https://shields.io/)`
+      } else {
+        badge += `[![Generic badge](https://img.shields.io/badge/Contact_at-<user_has_no_public_email>-<COLOR>.svg)](https://shields.io/)`
+      }
+
+      profileImg += `<img src="${avatar_url}" height="150px" />`;
+
+    }).then(function createHTML() {
+
+  testReadmeData = 
 `
 # ${title}
   
 ## Created by: ${username}
+
+${profileImg}
+
+${badge}
 
 ## Index
 
@@ -126,13 +139,11 @@ ${tests}
 ### FAQs
 
 ${questions}
-
-
-
 `
-
+}).then(function() {
   fs.writeFile("testReadMe.md", testReadmeData, function(err) {
     if (err) throw err;
     console.log("Success")
   })
+})
 })
