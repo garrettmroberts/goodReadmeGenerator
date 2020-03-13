@@ -14,13 +14,13 @@ inquirer.prompt([
     type: "input",
     message: "What is the title of your project?",
     name: "title",
-    default: "Effing metal proj"
+    default: "good README generator"
   },
   {
     type: "input",
     message: "What is a good description for your project?",
     name: "description",
-    default: "This will literally blow your mind."
+    default: "This README generator creates a README for the user via a series of questions and answers in the CLI."
   }, 
   {
     type: "text",
@@ -53,17 +53,19 @@ inquirer.prompt([
   },
   {
     type: "text",
-    message: "What needs to be in your FAQ?",
+    message: "What needs to be in your FAQ? (You can create multiple questions by putting a * into your text.)" ,
     name: "questions",
-    default: "Idk, whatever."
+    default: "\n 1. **Can I use markdown in the command line?** Bold and italics are supported in this program. \n 2.  **What should I do if I find a bug?** Add an issue to GitHub and we will take a look at it as soon as possible."
   }
 
 ]).then(function(res) {
   // Destructures data to go into README
-  const { title, username, description, installation, usage, license, contributing, tests, questions } = res;
+  const { title, username, license } = res;
+  let { description, installation, usage, contributing, tests, questions } = res;
   var badge = "";
   var profileImg = "";
 
+  // Gets information from Github to add to README
   axios
     .get(`https://api.github.com/users/${username}`)
     .then(function(res) {
@@ -76,9 +78,10 @@ inquirer.prompt([
 
       profileImg += `<img src="${avatar_url}" height="150px" />`;
 
-    }).then(function createHTML() {
+    // Fills out template once all processingis done
+    }).then(function() {
 
-  testReadmeData = 
+  readmeData = 
 `
 # ${title}
   
@@ -140,10 +143,11 @@ ${tests}
 
 ${questions}
 `
-}).then(function() {
-  fs.writeFile("testReadMe.md", testReadmeData, function(err) {
-    if (err) throw err;
-    console.log("Success")
+  // Sends template to README.md
+  }).then(function() {
+    fs.writeFile("README.md", readmeData, function(err) {
+      if (err) throw err;
+      console.log("Success")
+    })
   })
-})
 })
