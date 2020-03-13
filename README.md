@@ -52,7 +52,7 @@ You can contribute by making a checking the 'issues' section of this repo.  If y
 
 ### Tests
 
-Idk, whatever.
+Tests available via Jest.
 
 <a name="questions"></a>
 
