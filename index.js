@@ -2,66 +2,56 @@ const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer")
 
+// Collects user input
 inquirer.prompt([
   {
     type: "input",
     message: "What is your gitHub username?",
     name: "username",
-    default: "garrettmroberts"
-    // Use this to find username and profile image via axios request
   },
   {
     type: "input",
     message: "What is the title of your project?",
     name: "title",
-    default: "good README generator"
   },
   {
     type: "input",
     message: "What is a good description for your project?",
     name: "description",
-    default: "This README generator creates a README for the user via a series of questions and answers in the CLI."
   }, 
   {
     type: "text",
     message: "How will your project be installed? (Please note, markdown is supported)",
     name: "installation",
-    default: "You can easily  install this program in a few simple steps: First, you need to fork this repo and save a clone to your computer. Then, open up the folder in your terminal and type **_node install_**.  This should save all of the necessary node modules to your system. In the same terminal, type node **_node index.js_** and this program will be run.  It will create a new file named 'README.md' that will hold all of your input."
   },
   {
     type: "text",
     message: "What is the recommended usage of your project?",
     name: "usage",
-    default: "This application is designed for users who need a quick and efficient way to make READMEs for their repositories.Once you have the application running, it will give you a series of prompts within the terminal.  After answering all of these questions, a readme will be generated for your project based on the given input."
   },
   {
     type: "list",
     choices: ["MIT", "GNU-GPLv3", "GNU AGPLv3", "GNU LGPLv3", "Unilicense", "Boost Software License 1.0", "Apache Lincense 2.0", "Mozilla Public License 2.0"],
     name: "license",
-    default: "MIT",
   }, {
     type: "text",
     message: "How can other users best contribute to your project?",
     name: "contributing",
-    default: "You can contribute by making a checking the 'issues' section of this repo.  If you find a problem you'd like to take on, make a pull request and name the branch after the name of the issue in question.  Later, push your solutions to the branch and make a pull request.  After two successful reviews, we will push your changes to the master branch."
   },
   {
     type: "text",
     message: "What tests would you like to include?",
     name: "tests",
-    default: "Idk, whatever."
   },
   {
     type: "text",
     message: "What needs to be in your FAQ? (You can create multiple questions by putting a * into your text.)" ,
     name: "questions",
-    default: "\n 1. **Can I use markdown in the command line?** Bold and italics are supported in this program. \n 2.  **What should I do if I find a bug?** Add an issue to GitHub and we will take a look at it as soon as possible."
   }
 
 ]).then(function(res) {
   // Destructures data to go into README
-  const { title, username, license } = res;
-  let { description, installation, usage, contributing, tests, questions } = res;
+  const { title, username, license, description, installation, usage, contributing, tests, questions } = res;
   var badge = "";
   var profileImg = "";
 
