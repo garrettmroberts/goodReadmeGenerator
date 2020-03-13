@@ -16,6 +16,7 @@
 5. [Contribuitng](#contributing)
 6. [Tests](#tests)
 7. [FAQ](#questions)
+8. [Screenshot](#screenshot)
 
 <a name="description"></a>
 
@@ -57,6 +58,10 @@ Idk, whatever.
 
 ### FAQs
 
-
  1. **Can I use markdown in the command line?** Bold and italics are supported in this program. 
  2.  **What should I do if I find a bug?** Add an issue to GitHub and we will take a look at it as soon as possible.
+
+ <a name="screenshot"></a>
+
+ ### Demo
+ ![Demo GIF](./screenshot.gif)

@@ -45,7 +45,7 @@ inquirer.prompt([
   },
   {
     type: "text",
-    message: "What needs to be in your FAQ? (You can create multiple questions by putting a * into your text.)" ,
+    message: "What needs to be in your FAQ?" ,
     name: "questions",
   }
 
